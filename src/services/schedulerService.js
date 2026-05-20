@@ -4,21 +4,30 @@ const activeTimers = {};
 function calculateReminderDate(dueDate, notificationTime) {
     const due = new Date(dueDate);
 
-    if (notificationTime === "1h") {
+    if (notificationTime === "10s") {
+        due.setSeconds(due.getSeconds() - 10);
+    } else if (notificationTime === "1h") {
         due.setHours(due.getHours() - 1);
     } else if (notificationTime === "24h") {
         due.setDate(due.getDate() - 1);
     } else if (notificationTime === "3d") {
         due.setDate(due.getDate() - 3);
-    // used for testing to get a prompt demo response
-    } else if (notificationTime === "10s") {
-        due.setSeconds(due.getSeconds() - 10);
+    } else {
+        throw new Error(`Invalid notificationTime: ${notificationTime}`);
     }
 
     return due;
 }
 
 function scheduleNotification(notification) {
+    const due = new Date(notification.dueDate);
+
+    if (due.getTime() <= Date.now()) {
+        console.log(`Due date already passed for: ${notification.assignmentName}`);
+        storage.updateNotificationStatus(notification.id, "missed");
+        return;
+    }
+
     const reminderDate = calculateReminderDate(
         notification.dueDate,
         notification.notificationTime
@@ -28,6 +37,7 @@ function scheduleNotification(notification) {
 
     if (delay <= 0) {
         console.log(`Reminder time already passed for: ${notification.assignmentName}`);
+        storage.updateNotificationStatus(notification.id, "missed");
         return;
     }
 

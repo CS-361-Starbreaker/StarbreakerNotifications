@@ -17,9 +17,12 @@ function createNotification(data) {
 
     notifications.push(newNotification);
     storage.saveNotifications(notifications);
+
     scheduler.scheduleNotification(newNotification);
 
-    return newNotification;
+    const updatedNotification = storage.findNotificationById(newNotification.id);
+
+    return updatedNotification;
 }
 
 function getNotifications(filters) {

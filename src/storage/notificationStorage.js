@@ -44,7 +44,8 @@ function updateNotificationStatus(id, status) {
                 ...n,
                 status,
                 ...(status === "sent" && { sentAt: new Date().toISOString() }),
-                ...(status === "cancelled" && { cancelledAt: new Date().toISOString() })
+                ...(status === "cancelled" && { cancelledAt: new Date().toISOString() }),
+                ...(status === "missed" && { missedAt: new Date().toISOString() })
             };
         }
 

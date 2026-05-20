@@ -48,7 +48,14 @@ fetch("http://localhost:3001/api/notifications", {
 ```bash
 curl -X POST http://localhost:3001/api/notifications \
 -H "Content-Type: application/json" \
--d '{"userId":1,"assignmentName":"Database Project","dueDate":"2026-05-20T23:59:00","notificationTime":"24h","priorityLevel":"high"}'
+-d '{"userId":1,"assignmentName":"Database Project","dueDate":"YYYY-MM-DDTHH:MM:SS","notificationTime":"24h","priorityLevel":"high"}'
+```
+
+```bash
+TIMESTAMP=$(node -e "console.log(new Date(Date.now() + 20000).toISOString())") && \
+curl -X POST http://localhost:3001/api/notifications \
+-H "Content-Type: application/json" \
+-d "{\"userId\":1,\"assignmentName\":\"Curl Test Reminder\",\"dueDate\":\"$TIMESTAMP\",\"notificationTime\":\"10s\",\"priorityLevel\":\"high\"}"
 ```
 
 ---

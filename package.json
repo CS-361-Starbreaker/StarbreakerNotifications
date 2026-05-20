@@ -1,0 +1,27 @@
+{
+  "name": "starbreakernotifications",
+  "version": "1.0.0",
+  "description": "Notifications microservice for Starbreakers group",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS-361-Starbreaker/StarbreakerNotifications.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CS-361-Starbreaker/StarbreakerNotifications/issues"
+  },
+  "homepage": "https://github.com/CS-361-Starbreaker/StarbreakerNotifications#readme",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
